@@ -55,6 +55,13 @@
             line-height: 1.6;
         }
 
+        body.scheme-2 {
+            --primary: #2d3e2d;
+            --secondary: #f9f7f4;
+            --accent: #8b6f47;
+            --text: #2d3e2d;
+        }
+
         nav {
             position: fixed;
             top: 0;
@@ -137,26 +144,23 @@
         .sample-block {
             position: absolute;
             width: 100%;
+            max-width: 700px;
             opacity: 0;
-            transition: all 0.6s ease;
-            transform: translateX(100%);
+            transition: opacity 0.6s ease;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) translateX(100%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
         }
 
         .sample-block.active {
             opacity: 1;
-            transform: translate(-50%, -50%) translateX(0);
-            position: absolute;
+            pointer-events: auto;
         }
 
-        .sample-block.exit-left {
-            transform: translateX(-100%);
-        }
-
+        .sample-block.exit-left,
         .sample-block.exit-right {
-            transform: translateX(100%);
+            opacity: 0;
         }
 
         .sample-content {
@@ -218,32 +222,7 @@
             color: var(--text);
         }
 
-        .color-scheme-selector {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            display: flex;
-            gap: 0.5rem;
-            z-index: 100;
-        }
 
-        .scheme-btn {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--primary);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .scheme-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .scheme-btn.s1 { background: linear-gradient(135deg, #1a2332 50%, #f4f1e8 50%); }
-        .scheme-btn.s2 { background: linear-gradient(135deg, #2d3e2d 50%, #f9f7f4 50%); }
-        .scheme-btn.s3 { background: linear-gradient(135deg, #3d2e2e 50%, #faf8f5 50%); }
-        .scheme-btn.s4 { background: linear-gradient(135deg, #1f2937 50%, #fefefe 50%); }
-        .scheme-btn.s5 { background: linear-gradient(135deg, #2563eb 50%, #f97316 50%); }
 
         @media (max-width: 768px) {
             h1 {
@@ -354,15 +333,7 @@
         </div>
     </div>
 
-    <div class="color-scheme-selector">
-        <button class="scheme-btn s1" onclick="changeScheme(1)" title="Navy & Cream"></button>
-        <button class="scheme-btn s2" onclick="changeScheme(2)" title="Forest & Cream"></button>
-        <button class="scheme-btn s3" onclick="changeScheme(3)" title="Burgundy & Cream"></button>
-        <button class="scheme-btn s4" onclick="changeScheme(4)" title="Slate & White"></button>
-        <button class="scheme-btn s5" onclick="changeScheme(5)" title="Blue & Orange"></button>
-    </div>
-
-    <script>
+<script>
         let currentSampleIndex = 0;
         const samples = document.querySelectorAll('.sample-block');
 
@@ -383,7 +354,7 @@
             setTimeout(() => {
                 currentSample.classList.remove('exit-left');
                 const nextSample = samples[currentSampleIndex];
-                nextSample.style.transform = 'translateX(100%)';
+                nextSample.style.transform = 'translate(-50%, -50%) translateX(100%)';
                 nextSample.classList.add('active');
             }, 600);
         }
@@ -398,14 +369,12 @@
             setTimeout(() => {
                 currentSample.classList.remove('exit-right');
                 const prevSample = samples[currentSampleIndex];
-                prevSample.style.transform = 'translateX(-100%)';
+                prevSample.style.transform = 'translate(-50%, -50%) translateX(-100%)';
                 prevSample.classList.add('active');
             }, 600);
         }
 
-        function changeScheme(schemeNumber) {
-            document.body.className = schemeNumber > 1 ? `scheme-${schemeNumber}` : '';
-        }
+
     </script>
 </body>
 </html>
