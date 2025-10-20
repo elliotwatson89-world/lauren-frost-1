@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lauren Frost - Treatment Writer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Default: Classic Fitzcarraldo Navy & Cream */
+            --primary: #1a2332;
+            --secondary: #f4f1e8;
+            --accent: #d4a574;
+            --text: #1a2332;
+        }
+
+        /* Color Scheme Options */
+        body.scheme-2 {
+            --primary: #2d3e2d;
+            --secondary: #f9f7f4;
+            --accent: #8b6f47;
+            --text: #2d3e2d;
+        }
+
+        body.scheme-3 {
+            --primary: #3d2e2e;
+            --secondary: #faf8f5;
+            --accent: #b4846c;
+            --text: #3d2e2e;
+        }
+
+        body.scheme-4 {
+            --primary: #1f2937;
+            --secondary: #fefefe;
+            --accent: #94a3b8;
+            --text: #1f2937;
+        }
+
+        body.scheme-5 {
+            --primary: #2563eb;
+            --secondary: #f5f5f5;
+            --accent: #f97316;
+            --text: #1e293b;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background-color: var(--secondary);
+            border-bottom: 1px solid var(--primary);
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: normal;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            letter-spacing: 0.15em;
+            margin-bottom: 3rem;
+            color: var(--accent);
+        }
+
+        .blurb {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-top: 3rem;
+            border-left: 2px solid var(--accent);
+            padding-left: 2rem;
+        }
+
+        .samples-container {
+            position: relative;
+            min-height: 400px;
+            margin-top: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sample-block {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transition: all 0.6s ease;
+            transform: translateX(100%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateX(100%);
+        }
+
+        .sample-block.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) translateX(0);
+            position: absolute;
+        }
+
+        .sample-block.exit-left {
+            transform: translateX(-100%);
+        }
+
+        .sample-block.exit-right {
+            transform: translateX(100%);
+        }
+
+        .sample-content {
+            border: 1px solid var(--primary);
+            padding: 2rem;
+            background-color: var(--secondary);
+        }
+
+        .sample-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+        }
+
+        .sample-text {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .navigation-arrows {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 2rem;
+        }
+
+        .arrow-btn {
+            background: none;
+            border: 1px solid var(--primary);
+            color: var(--text);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2rem;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .arrow-btn:hover {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            font-size: 1.1rem;
+            line-height: 2.5;
+        }
+
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--text);
+        }
+
+        .color-scheme-selector {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .scheme-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .scheme-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .scheme-btn.s1 { background: linear-gradient(135deg, #1a2332 50%, #f4f1e8 50%); }
+        .scheme-btn.s2 { background: linear-gradient(135deg, #2d3e2d 50%, #f9f7f4 50%); }
+        .scheme-btn.s3 { background: linear-gradient(135deg, #3d2e2e 50%, #faf8f5 50%); }
+        .scheme-btn.s4 { background: linear-gradient(135deg, #1f2937 50%, #fefefe 50%); }
+        .scheme-btn.s5 { background: linear-gradient(135deg, #2563eb 50%, #f97316 50%); }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+            
+            .blurb {
+                font-size: 1rem;
+            }
+
+            nav {
+                padding: 1.5rem 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .arrow-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home" onclick="showPage('home')">Home</a></li>
+            <li><a href="#samples" onclick="showPage('samples')">Samples</a></li>
+            <li><a href="#contact" onclick="showPage('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div id="home" class="page active">
+        <div class="container">
+            <h1>Lauren Frost</h1>
+            <h2>Treatment Writer</h2>
+            <div class="blurb">
+                Lauren has written winning treatments for brands including Mercedes, McDonald's, Prada, Kenzo, the FIFA Women's World Cup and Porsche.
+            </div>
+        </div>
+    </div>
+
+    <div id="samples" class="page">
+        <div class="container">
+            <h2>Samples</h2>
+            <div class="samples-container">
+                <div class="sample-block active" data-index="0">
+                    <div class="sample-content">
+                        <div class="sample-title">Mercedes-Benz Campaign</div>
+                        <div class="sample-text">
+                            A cinematic exploration of modern luxury through the lens of sustainable innovation. The treatment weaves together intimate character moments with sweeping automotive poetry, positioning the vehicle not as a product but as a partner in life's most meaningful journeys. Each frame is carefully constructed to balance technical precision with emotional resonance.
+                        </div>
+                    </div>
+                </div>
+                <div class="sample-block" data-index="1">
+                    <div class="sample-content">
+                        <div class="sample-title">McDonald's Global Initiative</div>
+                        <div class="sample-text">
+                            A celebration of everyday moments that become extraordinary through simple acts of connection. This treatment embraces authenticity and diversity, creating a tapestry of human experiences unified by shared joy. The approach is documentary-influenced yet stylistically bold, capturing the brand's evolution while honoring its universal appeal.
+                        </div>
+                    </div>
+                </div>
+                <div class="sample-block" data-index="2">
+                    <div class="sample-content">
+                        <div class="sample-title">Prada Fashion Film</div>
+                        <div class="sample-text">
+                            An atmospheric meditation on form, texture, and the architecture of desire. The treatment constructs a visual language that speaks to fashion as art, exploring the interplay between garment and wearer through precisely choreographed movements. Each sequence builds toward a crescendo of aesthetic philosophy made tangible.
+                        </div>
+                    </div>
+                </div>
+                <div class="sample-block" data-index="3">
+                    <div class="sample-content">
+                        <div class="sample-title">FIFA Women's World Cup</div>
+                        <div class="sample-text">
+                            A powerful narrative celebrating athleticism, determination, and the breaking of barriers. This treatment captures the electric energy of competition while highlighting the personal stories behind the players. The approach balances epic sporting moments with intimate portraits of dedication, creating an anthem for a new era in football.
+                        </div>
+                    </div>
+                </div>
+                <div class="sample-block" data-index="4">
+                    <div class="sample-content">
+                        <div class="sample-title">Porsche Heritage Series</div>
+                        <div class="sample-text">
+                            An ode to engineering excellence and the romance of the open road. The treatment honors Porsche's legendary history while firmly looking forward, blending archival sensibility with contemporary visual language. Each shot is crafted to emphasize both the machine's perfection and the visceral experience of driving it.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation-arrows">
+                <button class="arrow-btn" onclick="previousSample()">←</button>
+                <button class="arrow-btn" onclick="nextSample()">→</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="page">
+        <div class="container">
+            <h2>Contact</h2>
+            <div class="contact-info">
+                <div><strong>Email:</strong> <a href="mailto:lauren@laurenfrost.com">lauren@laurenfrost.com</a></div>
+                <div><strong>Phone:</strong> <a href="tel:+442071234567">+44 20 7123 4567</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="color-scheme-selector">
+        <button class="scheme-btn s1" onclick="changeScheme(1)" title="Navy & Cream"></button>
+        <button class="scheme-btn s2" onclick="changeScheme(2)" title="Forest & Cream"></button>
+        <button class="scheme-btn s3" onclick="changeScheme(3)" title="Burgundy & Cream"></button>
+        <button class="scheme-btn s4" onclick="changeScheme(4)" title="Slate & White"></button>
+        <button class="scheme-btn s5" onclick="changeScheme(5)" title="Blue & Orange"></button>
+    </div>
+
+    <script>
+        let currentSampleIndex = 0;
+        const samples = document.querySelectorAll('.sample-block');
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function nextSample() {
+            const currentSample = samples[currentSampleIndex];
+            currentSample.classList.add('exit-left');
+            currentSample.classList.remove('active');
+            
+            currentSampleIndex = (currentSampleIndex + 1) % samples.length;
+            
+            setTimeout(() => {
+                currentSample.classList.remove('exit-left');
+                const nextSample = samples[currentSampleIndex];
+                nextSample.style.transform = 'translateX(100%)';
+                nextSample.classList.add('active');
+            }, 600);
+        }
+
+        function previousSample() {
+            const currentSample = samples[currentSampleIndex];
+            currentSample.classList.add('exit-right');
+            currentSample.classList.remove('active');
+            
+            currentSampleIndex = (currentSampleIndex - 1 + samples.length) % samples.length;
+            
+            setTimeout(() => {
+                currentSample.classList.remove('exit-right');
+                const prevSample = samples[currentSampleIndex];
+                prevSample.style.transform = 'translateX(-100%)';
+                prevSample.classList.add('active');
+            }, 600);
+        }
+
+        function changeScheme(schemeNumber) {
+            document.body.className = schemeNumber > 1 ? `scheme-${schemeNumber}` : '';
+        }
+    </script>
+</body>
+</html>
