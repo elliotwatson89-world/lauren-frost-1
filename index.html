@@ -246,6 +246,11 @@
                 gap: 1rem;
             }
 
+            .emoticon-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
             .arrow-btn {
                 padding: 0.8rem 1.5rem;
                 font-size: 1.5rem;
@@ -258,6 +263,7 @@
         <ul>
             <li><a href="#home" onclick="showPage('home')">Home</a></li>
             <li><a href="#samples" onclick="showPage('samples')">Samples</a></li>
+            <li><a href="#emoticons" onclick="showPage('emoticons')">Emoticons</a></li>
             <li><a href="#contact" onclick="showPage('contact')">Contact</a></li>
         </ul>
     </nav>
@@ -321,6 +327,111 @@
                 <button class="arrow-btn" onclick="previousSample()">←</button>
                 <button class="arrow-btn" onclick="nextSample()">→</button>
             </div>
+        </div>
+    </div>
+
+    <div id="emoticons" class="page">
+        <div class="container">
+            <h2>Emoticons</h2>
+            <div class="emoticon-grid">
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">¯\_(ツ)_/¯</div>
+                    <div class="emoticon-label">Shrug</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(╯°□°)╯︵ ┻━┻</div>
+                    <div class="emoticon-label">Table Flip</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">┬─┬ノ( º _ ºノ)</div>
+                    <div class="emoticon-label">Table Fix</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(づ｡◕‿‿◕｡)づ</div>
+                    <div class="emoticon-label">Hug</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">( ͡° ͜ʖ ͡°)</div>
+                    <div class="emoticon-label">Lenny Face</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">ಠ_ಠ</div>
+                    <div class="emoticon-label">Disapproval</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">ʕ•ᴥ•ʔ</div>
+                    <div class="emoticon-label">Bear</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧</div>
+                    <div class="emoticon-label">Magic</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">♪┏(･o･)┛♪</div>
+                    <div class="emoticon-label">Dancing</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(☞ﾟヮﾟ)☞</div>
+                    <div class="emoticon-label">Pointing</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">☜(⌒▽⌒)☞</div>
+                    <div class="emoticon-label">Double Point</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(ง'̀-'́)ง</div>
+                    <div class="emoticon-label">Fight Me</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(◕‿◕)</div>
+                    <div class="emoticon-label">Happy</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">｡◕‿◕｡</div>
+                    <div class="emoticon-label">Cute</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(•_•) ( •_•)>⌐■-■ (⌐■_■)</div>
+                    <div class="emoticon-label">Deal With It</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">¬_¬</div>
+                    <div class="emoticon-label">Side Eye</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">( ˘ ³˘)♥</div>
+                    <div class="emoticon-label">Kiss</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(✿◠‿◠)</div>
+                    <div class="emoticon-label">Flower</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">ᕕ( ᐛ )ᕗ</div>
+                    <div class="emoticon-label">Running</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(╥_╥)</div>
+                    <div class="emoticon-label">Crying</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">༼ つ ◕_◕ ༽つ</div>
+                    <div class="emoticon-label">Give</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(⊙_⊙)</div>
+                    <div class="emoticon-label">Shocked</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">(╬ ಠ益ಠ)</div>
+                    <div class="emoticon-label">Angry</div>
+                </div>
+                <div class="emoticon-item" onclick="copyEmoticon(this)">
+                    <div class="emoticon-display">ヾ(⌐■_■)ノ♪</div>
+                    <div class="emoticon-label">Cool Dance</div>
+                </div>
+            </div>
+            <div class="copy-notice">Click any emoticon to copy it to your clipboard</div>
         </div>
     </div>
 
